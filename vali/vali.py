@@ -11,9 +11,9 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-VALI_DIR='crossvalidation_CB513'
-TRAIN_DIR='crossvalidation_CB513/training'
-TEST_DIR='crossvalidation_CB513/test'
+VALI_DIR='crossvalidation'
+TRAIN_DIR='crossvalidation/training'
+TEST_DIR='crossvalidation/test'
 
 def plot_summary_per_fold(path_to_summary: str, name_of_db: str):
     # Load the data
