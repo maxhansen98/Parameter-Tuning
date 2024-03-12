@@ -15,6 +15,7 @@ VALI_DIR='crossvalidation'
 TRAIN_DIR='crossvalidation/training'
 TEST_DIR='crossvalidation/test'
 
+
 def plot_summary_per_fold(path_to_summary: str, name_of_db: str):
     # Load the data
     data = pd.read_csv(path_to_summary, sep='\t', header=None)
@@ -41,10 +42,11 @@ def plot_summary_per_fold(path_to_summary: str, name_of_db: str):
     plt.title("Crossvalidation " + plot_title + " on " + name_of_db)
     plt.tight_layout()
     plt.savefig(plot_path)
+    # clear plot for nect plot
+    plt.clf()
 
 
 def create_folds(folds: int, file: str):
-    # purge content of crossvalidation folder train and test
     if not os.path.exists(VALI_DIR):
         os.mkdir(VALI_DIR)
     if not os.path.exists(TRAIN_DIR):
@@ -53,10 +55,10 @@ def create_folds(folds: int, file: str):
         os.mkdir(TEST_DIR)
 
     # clear content of crossvalidation folder
-    for file in os.listdir(TRAIN_DIR):
-        os.remove(f'{TRAIN_DIR}/{file}')
-    for file in os.listdir(TEST_DIR):
-        os.remove(f'{TEST_DIR}/{file}')
+    # for file in os.listdir(TRAIN_DIR):
+    #     os.remove(f'{TRAIN_DIR}/{file}')
+    # for file in os.listdir(TEST_DIR):
+    #     os.remove(f'{TEST_DIR}/{file}')
 
     # read file and create a list of tuples (pdb_id, sequence, secondary structure)
     seqs = []
