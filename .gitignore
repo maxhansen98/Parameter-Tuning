@@ -1,5 +1,1 @@
-vali/crossvalidation/*
-vali/models/*
-vali/predictions/*
-vali/validation/g*
-vali/validation_run_1/validation/g*
+hyper/train/
