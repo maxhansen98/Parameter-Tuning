@@ -77,7 +77,7 @@ def crossvalidate_gor_v(folds: int, run_id: str, gor: list[int], name_of_db: str
 
 def write_summary_to_file(paths: list[str], name_of_db: str):
 
-    summary_out_path = paths[0].split(".")[0].replace("fold1_", "") + "_ALL.scores"
+    summary_out_path = paths[0].split(".")[0] + "_ALL.scores"
     os.system(f"touch {summary_out_path}")
     with open(summary_out_path, 'w') as merged_file:
         # crate file (summary_out_path)
@@ -94,27 +94,31 @@ def write_summary_to_file(paths: list[str], name_of_db: str):
             except FileNotFoundError:
                 print(f"File {file_path} not found.")
 
-    plot_summary_per_fold(summary_out_path, name_of_db)
-
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Crossvalidat on dataset")
-    parser.add_argument('--gor', type=int, nargs="+", required=False, help="Gor type to crossvalidate on")
-    parser.add_argument('--id', type=str, required=True, help="Run id for the crossvalidation")
-    parser.add_argument('--ali', action='store_true', required=False, help="Run gor 5 for all gor given in the list")
-    parser.add_argument('--folds', type=int, required=True, default=None, help="Number of folds for crossvalidation")
-    parser.add_argument('--db', type=str, required=True, default=None, help="File to split into folds")
-    args = parser.parse_args()
-    run_id = args.id
-    folds = args.folds
-    gor = args.gor
-    db = args.db
-    name_of_db = db.split(".")[-2].split("/")[-1]
 
-    create_folds(folds, db)  # create folds
+    for model in tqdm([1,3,4], desc='Models', leave=False):
+        paths_of_summary = []
+        for fold in tqdm([13,15, 21,23, 31], desc='Folds'):
+            command = ["java", "-jar", "JARS/evalGor.jar", 
+                       "-p", f"predictions/gor_{model}_w_{fold}.prd", 
+                       "-r", f"cb513.db",
+                       "-s", f"results/gor_{model}_w_{fold}_SUMMARY.txt",
+                       "-d", f"results/gor_{model}_w_{fold}_DETAILED.txt",
+                       "-b"]
+            subprocess.run(command, stdout=DEVNULL)
 
-    crossvalidate(folds, run_id, gor, name_of_db)  # gor I III IV
-
-    if args.ali: 
-        crossvalidate_gor_v(folds, run_id, gor, name_of_db)  # for gor V
+            paths_of_summary.append(f"results/gor_{model}_w_{fold}_SUMMARY_plot.scores")
     
+    for model in tqdm([1,3,4], desc='Models', leave=False):
+        paths_of_summary = []
+        for fold in tqdm([13,15, 21,23, 31], desc='Folds'):
+            command = ["java", "-jar", "JARS/evalGor.jar", 
+                       "-p", f"predictions/gor_5_{model}_w_{fold}.prd", 
+                       "-r", f"cb513.db",
+                       "-s", f"results/gor_5_{model}_w_{fold}_SUMMARY.txt",
+                       "-d", f"results/gor_5_{model}_w_{fold}_DETAILED.txt",
+                       "-b"]
+            subprocess.run(command, stdout=DEVNULL)
+
+            paths_of_summary.append(f"results/gor_5_{model}_w_{fold}_SUMMARY_plot.scores")
