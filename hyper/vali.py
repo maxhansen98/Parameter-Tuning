@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
     for model in tqdm([1,3,4], desc='Models', leave=False):
         paths_of_summary = []
-        for fold in tqdm([13,15, 21,23, 31], desc='Folds'):
+        for fold in tqdm([3], desc='Folds'):
             command = ["java", "-jar", "JARS/evalGor.jar", 
                        "-p", f"predictions/gor_{model}_w_{fold}.prd", 
                        "-r", f"cb513.db",
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     
     for model in tqdm([1,3,4], desc='Models', leave=False):
         paths_of_summary = []
-        for fold in tqdm([13,15, 21,23, 31], desc='Folds'):
+        for fold in tqdm([3], desc='Folds'):
             command = ["java", "-jar", "JARS/evalGor.jar", 
                        "-p", f"predictions/gor_5_{model}_w_{fold}.prd", 
                        "-r", f"cb513.db",

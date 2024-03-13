@@ -71,7 +71,6 @@ import seaborn as sns
 if __name__ == "__main__":
     data = pd.read_csv("results_s_q.csv", delimiter=";")
 
-
     # plot the SOV
     sns.set_palette("colorblind")
     sns.set_theme("poster")
@@ -80,17 +79,18 @@ if __name__ == "__main__":
     plt.figure(figsize=(12, 8))
 
     sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "SOV mean"], marker="o")
-    plt.title("SOV mean", fontsize=17)
-    plt.xlabel("Windowsize", fontsize=17)
-    plt.ylabel("Score", fontsize=17)
+    plt.title("SOV mean", fontsize=19)
+    plt.xlabel("Windowsize", fontsize=19)
+    plt.ylabel("Score", fontsize=19)
 
     # make x ticks bigger
-    plt.xticks(fontsize=14)
+    plt.xticks(fontsize=19)
     # make y ticks bigger
-    plt.yticks(fontsize=14)
-    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.yticks(fontsize=19)
+    plt.legend(title="", loc="upper left", bbox_to_anchor=(1, 0.6), fontsize=18, frameon=False, handlelength=1)
     plt.grid(True)  # Enable grid lines
-    plt.show()
+    plt.savefig("SOV_mean.png", bbox_inches='tight')
+    plt.clf()
 
     # plot the Q3
     sns.set_palette("colorblind")
@@ -100,17 +100,18 @@ if __name__ == "__main__":
     plt.figure(figsize=(12, 8))
 
     sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "Q3 mean"], marker="o")
-    plt.title("SOV mean", fontsize=17)
-    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.xlabel("Windowsize", fontsize=17)
-    plt.ylabel("Score", fontsize=17)
+    plt.title("Q3 mean", fontsize=19)
+    plt.xlabel("Windowsize", fontsize=19)
+    plt.ylabel("Score", fontsize=19)
 
+    plt.legend(title="", loc="upper left", bbox_to_anchor=(1, 0.6), fontsize=18, frameon=False, handlelength=1)
     # make x ticks bigger
-    plt.xticks(fontsize=14)
+    plt.xticks(fontsize=19)
     # make y ticks bigger
-    plt.yticks(fontsize=14)
+    plt.yticks(fontsize=19)
     plt.grid(True)  # Enable grid lines
-    plt.show()
+    plt.savefig("Q3_mean.png", bbox_inches='tight')
+    plt.clf()
 
 
     data = pd.read_csv("results_sov_only.csv", delimiter=";")
@@ -118,36 +119,82 @@ if __name__ == "__main__":
     sns.set_palette("colorblind")
     sns.set_theme("poster")
     sns.set_style("ticks")
+    plt.figure(figsize=(12, 8))
     sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "SOV_E mean"], marker="o")
-    plt.title("SOV_E mean", fontsize=17)
-    plt.xlabel("Windowsize", fontsize=17)
-    plt.ylabel("Score", fontsize=17)
-    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.title("SOV_E mean", fontsize=19)
+    plt.xlabel("Windowsize", fontsize=19)
+    plt.ylabel("Score", fontsize=19)
     plt.grid(True)  # Enable grid lines
+    plt.legend(title="", loc="upper left", bbox_to_anchor=(1, 0.6), fontsize=18, frameon=False, handlelength=1)
     # make x ticks bigger
-    plt.xticks(fontsize=14)
+    plt.xticks(fontsize=19)
     # make y ticks bigger
-    plt.yticks(fontsize=14)
-    plt.show()
+    plt.yticks(fontsize=19)
+    plt.savefig("SOV_E_mean.png", bbox_inches='tight')
+    plt.clf()
 
 
     sns.set_palette("colorblind")
     sns.set_theme("poster")
     sns.set_style("ticks")
+    plt.figure(figsize=(12, 8))
     sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "SOV_H mean"], marker="o")
-    plt.title("SOV_H mean", fontsize=17)
-    plt.xlabel("Windowsize", fontsize=17)
-    plt.ylabel("Score", fontsize=17)
+    plt.title("SOV_H mean", fontsize=19)
+    plt.legend(title="", loc="upper left", bbox_to_anchor=(1, 0.6), fontsize=18, frameon=False, handlelength=1)
+    plt.xlabel("Windowsize", fontsize=19)
+    plt.ylabel("Score", fontsize=19)
     plt.grid(True)  # Enable grid lines
 
-    # position the legend to the right outer side
-    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
     # make x ticks bigger
-    plt.xticks(fontsize=14)
+    plt.xticks(fontsize=19)
     # make y ticks bigger
-    plt.yticks(fontsize=14)
-    plt.show()
+    plt.yticks(fontsize=19)
+    plt.savefig("SOV_H_mean.png", bbox_inches='tight')
+    plt.clf()
+
+
+
+    data = pd.read_csv("/home/malte/maxi/res.csv", delimiter=";")
+    sns.set_palette("colorblind")
+    sns.set_theme("poster")
+    sns.set_style("ticks")
+    plt.figure(figsize=(12, 8))
+    sns.lineplot(x="model", y="value", hue="p", data=data[data["score"] == "SOV mean"], marker="o")
+    plt.title("SOV mean postprocessing", fontsize=19)
+    plt.legend(title="", loc="upper left", bbox_to_anchor=(1, 0.6), fontsize=18, frameon=False, handlelength=1)
+    plt.xlabel("Model", fontsize=19)
+    plt.ylabel("Score", fontsize=19)
+    plt.grid(True)  # Enable grid lines
+
+
+    # make x ticks bigger
+    plt.xticks(fontsize=19)
+    # make y ticks bigger
+    plt.yticks(fontsize=19)
+    plt.savefig("SOV_post_proc.png", bbox_inches='tight')
+    plt.clf()
+
+
+    data = pd.read_csv("/home/malte/maxi/res.csv", delimiter=";")
+    sns.set_palette("colorblind")
+    sns.set_theme("poster")
+    sns.set_style("ticks")
+    plt.figure(figsize=(12, 8))
+    sns.lineplot(x="model", y="value", hue="p", data=data[data["score"] == "Q3 mean"], marker="o")
+    plt.title("Q3 mean postprocessing", fontsize=19)
+    plt.legend(title="", loc="upper left", bbox_to_anchor=(1, 0.6), fontsize=18, frameon=False, handlelength=1)
+    plt.xlabel("Model", fontsize=19)
+    plt.ylabel("Score", fontsize=19)
+    plt.grid(True)  # Enable grid lines
+
+
+    # make x ticks bigger
+    plt.xticks(fontsize=19)
+    # make y ticks bigger
+    plt.yticks(fontsize=19)
+    plt.savefig("Q3_post_proc.png", bbox_inches='tight')
+    plt.clf()
 
 
 
