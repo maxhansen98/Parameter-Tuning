@@ -71,30 +71,85 @@ import seaborn as sns
 if __name__ == "__main__":
     data = pd.read_csv("results_s_q.csv", delimiter=";")
 
-    # now plot the data, first the SOV
-    # make the x axis show the curr windowsize
-    # make the outlines bold
-    # the lines shouldnt be too slim
-    # add a legend
-
-    # plot the SOV and make small points of the sov mean at the windowsize
-    # also plot the Q3 and make small points of the q3 mean at the windowsize
 
     # plot the SOV
-    sns.set_style(style="whitegrid")
+    sns.set_palette("colorblind")
+    sns.set_theme("poster")
+    sns.set_style("ticks")
+    # Create the bar plot with custom error bars and hue="Model"
+    plt.figure(figsize=(12, 8))
+
     sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "SOV mean"], marker="o")
     plt.title("SOV mean", fontsize=17)
     plt.xlabel("Windowsize", fontsize=17)
-    plt.xlabel("Score", fontsize=17)
+    plt.ylabel("Score", fontsize=17)
+
+    # make x ticks bigger
+    plt.xticks(fontsize=14)
+    # make y ticks bigger
+    plt.yticks(fontsize=14)
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.grid(True)  # Enable grid lines
     plt.show()
 
     # plot the Q3
-    sns.set_style(style="whitegrid")
+    sns.set_palette("colorblind")
+    sns.set_theme("poster")
+    sns.set_style("ticks")
+    # Create the bar plot with custom error bars and hue="Model"
+    plt.figure(figsize=(12, 8))
+
     sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "Q3 mean"], marker="o")
-    plt.title("Q3 mean", fontsize=17)
+    plt.title("SOV mean", fontsize=17)
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.xlabel("Windowsize", fontsize=17)
-    plt.xlabel("Score", fontsize=17)
+    plt.ylabel("Score", fontsize=17)
+
+    # make x ticks bigger
+    plt.xticks(fontsize=14)
+    # make y ticks bigger
+    plt.yticks(fontsize=14)
+    plt.grid(True)  # Enable grid lines
     plt.show()
+
+
+    data = pd.read_csv("results_sov_only.csv", delimiter=";")
+    # plot the SOV_E mean
+    sns.set_palette("colorblind")
+    sns.set_theme("poster")
+    sns.set_style("ticks")
+    sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "SOV_E mean"], marker="o")
+    plt.title("SOV_E mean", fontsize=17)
+    plt.xlabel("Windowsize", fontsize=17)
+    plt.ylabel("Score", fontsize=17)
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.grid(True)  # Enable grid lines
+    # make x ticks bigger
+    plt.xticks(fontsize=14)
+    # make y ticks bigger
+    plt.yticks(fontsize=14)
+    plt.show()
+
+
+    sns.set_palette("colorblind")
+    sns.set_theme("poster")
+    sns.set_style("ticks")
+    sns.lineplot(x="windowsize", y="value", hue="gorModel", data=data[data["score"] == "SOV_H mean"], marker="o")
+    plt.title("SOV_H mean", fontsize=17)
+    plt.xlabel("Windowsize", fontsize=17)
+    plt.ylabel("Score", fontsize=17)
+    plt.grid(True)  # Enable grid lines
+
+    # position the legend to the right outer side
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
+    # make x ticks bigger
+    plt.xticks(fontsize=14)
+    # make y ticks bigger
+    plt.yticks(fontsize=14)
+    plt.show()
+
+
 
 
 
